@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * @author 戮漠
  */
+
+
+@org.springframework.stereotype.Controller
 public class Controller {
 
     @RequestMapping("/demo")
-    public @ResponseBody String test(@RequestParam int n, @RequestParam int r) {
+    static public @ResponseBody String test() {
         ExpressionDaoImpl t = new ExpressionDaoImpl();
-        return t.generateExpression(n, r);
+        return "hi";
     }
 }
