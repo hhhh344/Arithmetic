@@ -2,7 +2,7 @@ package dao;
 
 /**
  * @author 戮漠
- *
+ *对表达式的操作的接口
  */
 public interface IExpressionDao {
     /**
