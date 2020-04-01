@@ -11,7 +11,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
     @Override
     public String generateExpression(int number, int range) {
         System.out.println("number="+number + "range" + range);
-        System.out.println("hhtgood！！！！！！！");
+        System.out.println("hhhhhhhhhhhhh");
         return "number="+number + "range=" + range;
     }
 }
