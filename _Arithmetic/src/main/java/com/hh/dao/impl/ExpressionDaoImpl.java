@@ -1,6 +1,6 @@
-package dao.impl;
+package com.hh.dao.impl;
 
-import dao.IExpressionDao;
+import com.hh.dao.IExpressionDao;
 
 /**
  * @author 戮漠

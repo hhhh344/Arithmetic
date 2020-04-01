@@ -1,4 +1,4 @@
-package dao.impl;
+package com.hh.dao.impl;
 
 /**
  * @author 戮漠
