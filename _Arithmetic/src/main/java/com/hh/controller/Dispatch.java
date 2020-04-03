@@ -2,6 +2,7 @@ package com.hh.controller;
 
 
 import com.hh.entity.Param;
+import com.hh.entity.Pattern;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,7 @@ public class Dispatch {
 
 //        ExpressionDaoImpl temp = new ExpressionDaoImpl();
 //        return temp.generateExpression(expressionsCount, range);
-
+        System.out.println(Pattern.patternMap.get(0));
         Param en = new Param();
         en.setNumber(number);
         en.setRange(range);
