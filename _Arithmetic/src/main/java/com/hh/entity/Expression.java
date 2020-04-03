@@ -1,7 +1,6 @@
 package com.hh.entity;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  *表达式定义
@@ -9,14 +8,26 @@ import java.util.Map;
  */
 public class Expression {
 
-    // 操作数列表
+    /**
+     * parameterList 操作数列表
+     */
     private List<Integer[]> parameterList;
-    // 操作符列表
+
+    /**
+     * operatorList 操作符列表
+     */
     private List<String> operatorList;
-    // 运算结果
+
+    /**
+     * result 运算结果
+     */
     private String result;
-    // 表达式模型
-    private int pattern;
+
+    /**
+     * pattern 表达式模型
+     */
+    private String pattern;
+
 
     public List<Integer[]> getParameterList() {
         return parameterList;
@@ -42,11 +53,11 @@ public class Expression {
         this.result = result;
     }
 
-    public int getPattern() {
+    public String getPattern() {
         return pattern;
     }
 
-    public void setPattern(int pattern) {
+    public void setPattern(String pattern) {
         this.pattern = pattern;
     }
 }

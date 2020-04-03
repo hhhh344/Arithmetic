@@ -7,17 +7,10 @@ package com.hh.dao;
 public interface ICalculateUtils {
 
     /**
-     *
-     */
-
-
-
-    /**
      * @param postfixExpression 后缀表达式
      * @return 表达式计算结果
      */
     public String getExpressionResult(String postfixExpression);
-
 
 
     /**
@@ -26,7 +19,6 @@ public interface ICalculateUtils {
      * @return 后缀表达式
      */
     public String getPostfixExpression(String expression);
-
 
 
     /**
