@@ -7,18 +7,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 数据管理
+ * 外部参数管理
  * @author 戮漠
  */
 
 
 @EntityScan
-public class Entity {
+public class Param {
 
     private int number;
     private int range;
 
-    public Entity() {
+    public Param() {
     }
 
     public int getNumber() {

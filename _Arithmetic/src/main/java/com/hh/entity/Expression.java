@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ *表达式定义
  * @author 戮漠
  */
 public class Expression {
@@ -15,6 +15,6 @@ public class Expression {
     private List<String> operatorList;
     // 运算结果
     private String result;
-    // 括号类型
-    private int bracketType;
+    // 表达式模型
+    private int pattern;
 }
