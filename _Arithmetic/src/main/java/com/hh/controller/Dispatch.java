@@ -20,8 +20,7 @@ public class Dispatch {
     static @ResponseBody
     String getParam(@RequestParam int number, @RequestParam int range) {
 
-//        ExpressionDaoImpl temp = new ExpressionDaoImpl();
-//        return temp.generateExpression(expressionsCount, range);
+
         System.out.println(Pattern.patternMap.get(0));
         Param en = new Param();
         en.setNumber(number);

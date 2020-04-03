@@ -40,4 +40,11 @@ public interface IExpressionDao {
      * @return 表达式模型
      */
     public String generatePattern();
+
+    /**
+     * 约分真分数
+     * @param fraction 分数
+     * @return 真分数
+     */
+    public Integer[] getProperFraction(Integer[] fraction);
 }
