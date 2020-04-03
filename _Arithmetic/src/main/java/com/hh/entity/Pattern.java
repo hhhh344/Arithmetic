@@ -5,10 +5,11 @@ import java.util.Map;
 
 public class Pattern {
 
-    public static Map<Integer, String> patternMap = new HashMap<Integer, String>();
+    public static final Map<Integer, String> patternMap = new HashMap<Integer, String>();
 
-    public Pattern() {
-
-        this.patternMap.put(0, "n#n");
+    static {
+        patternMap.put(0, "n#n");
+        patternMap.put(1, "n#n#n");
     }
+
 }
