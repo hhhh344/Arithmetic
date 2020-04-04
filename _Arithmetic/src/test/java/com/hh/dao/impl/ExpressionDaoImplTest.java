@@ -1,5 +1,6 @@
 package com.hh.dao.impl;
 
+import com.hh.entity.Expression;
 import org.junit.jupiter.api.Test;
 
 
@@ -59,4 +60,11 @@ class ExpressionDaoImplTest {
         }
     }
 
+    @Test
+    void generateExpression() {
+        for(int i = 0; i < 100; i++) {
+            Expre.expressionToString(Expre.generateExpression(10));
+        }
+
+    }
 }

@@ -24,9 +24,38 @@ public class ExpressionDaoImpl implements IExpressionDao {
 
     @Override
     public Expression generateExpression(int range) {
+        Expression exp = new Expression();
+        List<Integer[]> parameterList = new ArrayList<>();
+        List<String> operatorList = new ArrayList<>();
+        String pattern = generatePattern();
 
-        return null;
+        for(int i = 0; i < pattern.length(); i++) {
+            switch (pattern.charAt(i)) {
+                case 'n':
+                    if(rand.nextFloat() > 0.5) {
+                        parameterList.add(generateNaturalNum(range));
+                    }
+                    else {
+                        parameterList.add(generateFraction(range));
+                    }
+                    break;
+
+                case '#':
+                    operatorList.add(generateOperator());
+                    break;
+
+                default: ;
+            }
+        }
+
+        exp.setPattern(pattern);
+        exp.setParameterList(parameterList);
+        exp.setOperatorList(operatorList);
+
+        return exp;
     }
+
+
 
     @Override
     public Integer[] generateNaturalNum(int range) {
@@ -78,4 +107,52 @@ public class ExpressionDaoImpl implements IExpressionDao {
         return Pattern.patternMap.get(temp);
     }
 
+    @Override
+    public String expressionToString(Expression exp) {
+        String pattern = exp.getPattern();
+        String returnString = "";
+
+        List<Integer[]> parameterList = exp.getParameterList();
+        Integer[] num;
+
+        List<String> operatorList = exp.getOperatorList();
+
+        int parameterIndex = 0;
+        int operatorIndex = 0;
+
+        for(int i = 0; i < pattern.length(); i++) {
+            char temp = pattern.charAt(i);
+            switch (temp) {
+                case '(':
+                case ')':
+                    returnString += temp + " ";
+                    break;
+
+                case 'n':
+                    num = parameterList.get(parameterIndex++);
+                    if(num[0] == 0) {
+                        returnString += num[1] + " ";
+                    }
+                    else {
+                        //如果带分数前面的整数为0，则只打印分数部分
+                        if(num[1] != 0) {
+                            returnString += num[1] + "'" + num[2] + "/" + num[3] + " ";
+                        }
+                        else {
+                            returnString += num[2] + "/" + num[3] + " ";
+                        }
+                    }
+                    break;
+
+                case '#':
+                    returnString += operatorList.get(operatorIndex++) + " ";
+                    break;
+
+                default: ;
+            }
+        }
+        returnString += "=";
+        System.out.println(returnString);
+        return returnString;
+    }
 }

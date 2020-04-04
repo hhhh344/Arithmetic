@@ -47,4 +47,11 @@ public interface IExpressionDao {
      * @return 真分数
      */
     public Integer[] getProperFraction(Integer[] fraction);
+
+    /**
+     * 将表达式化为标准形式
+     * @param exp 表达式
+     * @return 标准形式字符串
+     */
+    public String expressionToString(Expression exp);
 }
