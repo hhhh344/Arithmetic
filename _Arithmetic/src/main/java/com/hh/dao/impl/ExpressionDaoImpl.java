@@ -56,7 +56,6 @@ public class ExpressionDaoImpl implements IExpressionDao {
     }
 
 
-
     @Override
     public Integer[] generateNaturalNum(int range) {
 

@@ -87,21 +87,20 @@ public class CalculateUtilsImpl implements ICalculateUtils {
                     }
                     break;
                 case '#':
-                    operator = operatorList.get(operatorIndex++);
-                    //如果S1为空，或栈顶为"("，则将该运算符进S1栈
+                    operator = operatorList.get(operatorIndex);
+                    //1.如果S1为空，或栈顶为"("，则将该运算符进S1栈
                     if(S1.peek() == "#" || S1.peek() == "(") {
                         S1.push(operator);
+                        operatorIndex++;
                     }
-                    //如果该运算符优先级(不包括括号运算符)大于S1栈栈顶运算符优先级，则将该运算符进S1栈
+                    //2.如果该运算符优先级(不包括括号运算符)大于S1栈栈顶运算符优先级，则将该运算符进S1栈
                     else if(comparePriority(operator, S1.peek())) {
                         S1.push(operator);
+                        operatorIndex++;
                     }
-                    //否则，将S1栈的栈顶运算符弹出，送入S2栈中，直至S1栈栈顶运算符低于（不包括等于）该运算符优先级，最后将该运算符送入S1栈
+                    //3.否则，将S1栈的栈顶运算符弹出，送入S2栈中，跳回1
                     else {
-                        do {
-                            S2.push(S1.pop());
-                        } while(!comparePriority(operator, S1.peek()));
-                        S1.push(operator);
+                        S2.push(S1.pop());
                     }
                     break;
                 //若取出的字符是“（”，则直接送入S1栈顶。
