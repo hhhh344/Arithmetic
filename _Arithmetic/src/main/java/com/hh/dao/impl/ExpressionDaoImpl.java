@@ -152,7 +152,6 @@ public class ExpressionDaoImpl implements IExpressionDao {
             }
         }
         returnString += "=";
-        System.out.println(returnString);
         return returnString;
     }
 }

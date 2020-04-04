@@ -14,6 +14,6 @@ class CalculateUtilsImplTest {
     void getPostfixExpression() {
         Expression expression = exp.generateExpression(10);
         System.out.println(exp.expressionToString(expression));
-        cal.getPostfixExpression(expression);
+        System.out.println(cal.getPostfixExpression(expression));
     }
 }

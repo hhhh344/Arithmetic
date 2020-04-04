@@ -122,8 +122,7 @@ public class CalculateUtilsImpl implements ICalculateUtils {
         while(S1.peek() != "#") {
             S2.push(S1.pop());
         }
-        System.out.println(S2.toString());
-        return null;
+        return S2.toString();
     }
 
     @Override
