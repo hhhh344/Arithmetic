@@ -42,17 +42,19 @@ class ExpressionDaoImplTest {
     @Test
     void getProperFraction() {
         Integer[] fra = new Integer[4];
-        for(int i=0;i<10;i++){
-            fra = Expre.generateFraction(10);
+        for(int i=0;i<100;i++){
+            fra = Expre.generateFraction(100);
             for(int j : fra){
                 System.out.print(j);
+                System.out.print(" ");
             }
             System.out.println("");
             Expre.getProperFraction(fra);
             for (int k : fra){
                 System.out.print(k);
-                System.out.println("");
+                System.out.print(" ");
             }
+            System.out.println("\n");
         }
     }
 

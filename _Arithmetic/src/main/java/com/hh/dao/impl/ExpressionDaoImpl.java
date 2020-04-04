@@ -24,6 +24,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
 
     @Override
     public Expression generateExpression(int range) {
+
         return null;
     }
 
@@ -45,7 +46,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
         fraction[2] = rand.nextInt(range-1)+1;
         temp = rand.nextInt(range-2)+2;
         //分子不能是分母的整倍数
-        while(temp%fraction[2]==0){
+        while(fraction[2]%temp==0){
             temp = rand.nextInt(range-2)+2;
         }
         fraction[3] = temp;
