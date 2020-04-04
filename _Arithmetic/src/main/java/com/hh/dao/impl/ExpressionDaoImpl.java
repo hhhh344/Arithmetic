@@ -44,7 +44,8 @@ public class ExpressionDaoImpl implements IExpressionDao {
         fraction[1] = rand.nextInt(range);
         fraction[2] = rand.nextInt(range-1)+1;
         temp = rand.nextInt(range-2)+2;
-        while(temp==fraction[2]){
+        //分子不能是分母的整倍数
+        while(temp%fraction[2]==0){
             temp = rand.nextInt(range-2)+2;
         }
         fraction[3] = temp;
@@ -57,8 +58,9 @@ public class ExpressionDaoImpl implements IExpressionDao {
     public Integer[] getProperFraction(Integer[] fraction) {
         int m,n,rem;
         fraction[1] += fraction[2]/fraction[3];
+        fraction[2] %= fraction[3];
         m = fraction[3];
-        n = fraction[2]%fraction[3];
+        n = fraction[2];
         while(n>0){
             rem = m % n;
             m = n;
