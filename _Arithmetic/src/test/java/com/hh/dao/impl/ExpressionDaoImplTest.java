@@ -29,11 +29,12 @@ class ExpressionDaoImplTest {
 
     @Test
     void generateFraction() {
-        Integer[] fra = new Integer[4];
-        for(int i=0;i<10;i++){
+        Integer[] fra;
+        for(int i=0;i<100;i++){
             fra = Expre.generateFraction(10);
             for(int j : fra){
                 System.out.print(j);
+                System.out.print(" ");
             }
             System.out.println();
         }
@@ -41,7 +42,7 @@ class ExpressionDaoImplTest {
 
     @Test
     void getProperFraction() {
-        Integer[] fra = new Integer[4];
+        Integer[] fra;
         for(int i=0;i<100;i++){
             fra = Expre.generateFraction(100);
             for(int j : fra){

@@ -39,20 +39,14 @@ public class ExpressionDaoImpl implements IExpressionDao {
 
     @Override
     public Integer[] generateFraction(int range) {
-        int temp;
         Integer[] fraction = new Integer[4];
         fraction[0] = 1;
         fraction[1] = rand.nextInt(range);
-        fraction[2] = rand.nextInt(range-1)+1;
-        temp = rand.nextInt(range-2)+2;
-        //分子不能是分母的整倍数
-        while(fraction[2]%temp==0){
-            temp = rand.nextInt(range-2)+2;
-        }
-        fraction[3] = temp;
+        fraction[3] = rand.nextInt(range-2)+2;
+        //分子必须比分母小
+        fraction[2] = rand.nextInt(fraction[3]-1)+1;
         //调用方法化简为真分数
-//        return getProperFraction(fraction);
-        return fraction;
+        return getProperFraction(fraction);
     }
 
     @Override
