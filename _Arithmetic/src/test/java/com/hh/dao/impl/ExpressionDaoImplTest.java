@@ -31,7 +31,7 @@ class ExpressionDaoImplTest {
     void generateFraction() {
         Integer[] fra;
         for(int i=0;i<100;i++){
-            fra = Expre.generateFraction(10);
+            fra = Expre.generateFraction(100);
             for(int j : fra){
                 System.out.print(j);
                 System.out.print(" ");
@@ -58,6 +58,5 @@ class ExpressionDaoImplTest {
             System.out.println("\n");
         }
     }
-
 
 }
