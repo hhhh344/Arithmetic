@@ -14,12 +14,8 @@ import java.util.Stack;
 
 public class CalculateUtilsImpl implements ICalculateUtils {
 
-    /**
-     * 获取操作符的优先级
-     * @param op 操作符
-     * @return 操作符的优先级
-     */
-    private int getPriorityValue(String op) {
+    @Override
+    public int getPriorityValue(String op) {
         switch (op) {
             case "#":
                 return 0;
@@ -34,20 +30,14 @@ public class CalculateUtilsImpl implements ICalculateUtils {
         }
     }
 
-    /**
-     *
-     * @param op1 操作符1
-     * @param op2 操作符2
-     * @return op1优先级高则返回1,否则返回0
-     */
-    private boolean comparePriority(String op1, String op2) {
+    @Override
+    public boolean comparePriority(String op1, String op2) {
         return getPriorityValue(op1) > getPriorityValue(op2);
     }
 
 
-
     @Override
-    public String getPostfixExpression(Expression expression) {
+    public Stack<String> getPostfixExpression(Expression expression) {
         Stack<String> S1 = new Stack<>();
         Stack<String> S2 = new Stack<>();
 
@@ -121,11 +111,56 @@ public class CalculateUtilsImpl implements ICalculateUtils {
         while(S1.peek() != "#") {
             S2.push(S1.pop());
         }
-        return S2.toString();
+        return S2;
     }
 
     @Override
-    public String getExpressionResult(String postfixExpression) {
+    public Integer[] getExpressionResult(Stack<String> postfixExpression) {
+
         return null;
+    }
+
+    @Override
+    public Integer[] calculateTwoNumber(Integer[] num1, Integer[] num2, String op) {
+        switch (op){
+            case "+":
+
+                break;
+            case "-":
+                break;
+            case "*":
+                break;
+            case "/":
+                break;
+            default:
+                throw new RuntimeException("没有该类型的运算符！");
+        }
+        return new Integer[0];
+    }
+
+
+    @Override
+    public Integer[] addition(Integer[] num1, Integer[] num2) {
+        return new Integer[0];
+    }
+
+    @Override
+    public Integer[] subtraction(Integer[] num1, Integer[] num2) {
+        return new Integer[0];
+    }
+
+    @Override
+    public Integer[] multiplication(Integer[] num1, Integer[] num2) {
+        return new Integer[0];
+    }
+
+    @Override
+    public Integer[] division(Integer[] num1, Integer[] num2) {
+        return new Integer[0];
+    }
+
+    @Override
+    public Integer[] toInteger(String num) {
+        return new Integer[0];
     }
 }

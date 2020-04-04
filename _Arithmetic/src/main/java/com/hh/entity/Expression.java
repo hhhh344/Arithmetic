@@ -21,7 +21,7 @@ public class Expression {
     /**
      * result 运算结果
      */
-    private String result;
+    private Integer[] result;
 
     /**
      * pattern 表达式模型
@@ -45,11 +45,11 @@ public class Expression {
         this.operatorList = operatorList;
     }
 
-    public String getResult() {
+    public Integer[] getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(Integer[] result) {
         this.result = result;
     }
 
