@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author HH
+ */
 @Controller
 public class Dispatch {
 
@@ -21,7 +24,6 @@ public class Dispatch {
     String getParam(@RequestParam int number, @RequestParam int range) {
 
 
-        System.out.println(Pattern.patternMap.get(0));
         Param en = new Param();
         en.setNumber(number);
         en.setRange(range);

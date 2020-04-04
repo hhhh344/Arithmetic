@@ -80,12 +80,12 @@ public class ExpressionDaoImpl implements IExpressionDao {
 
     @Override
     public Integer[] getProperFraction(Integer[] fraction) {
-        int m,n,rem;
+        int m, n, rem;
         fraction[1] += fraction[2]/fraction[3];
         fraction[2] %= fraction[3];
         m = fraction[3];
         n = fraction[2];
-        while(n>0){
+        while(n > 0){
             rem = m % n;
             m = n;
             n = rem;
@@ -104,7 +104,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
     @Override
     public String generatePattern() {
         int temp = rand.nextInt(14);
-        return Pattern.patternMap.get(temp);
+        return Pattern.PATTERN_MAP.get(temp);
     }
 
     @Override
