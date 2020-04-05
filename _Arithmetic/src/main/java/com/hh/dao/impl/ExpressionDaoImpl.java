@@ -115,6 +115,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
         Integer[] num;
 
         List<String> operatorList = exp.getOperatorList();
+        String operator;
 
         int parameterIndex = 0;
         int operatorIndex = 0;
@@ -144,7 +145,13 @@ public class ExpressionDaoImpl implements IExpressionDao {
                     break;
 
                 case '#':
-                    returnString += operatorList.get(operatorIndex++) + " ";
+                    operator = operatorList.get(operatorIndex++);
+                    if(operator.contains("/")) {
+                        returnString += "÷ ";
+                    }
+                    else {
+                        returnString += operator + " ";
+                    }
                     break;
 
                 default: ;

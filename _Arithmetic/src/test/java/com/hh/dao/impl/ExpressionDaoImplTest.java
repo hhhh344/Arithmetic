@@ -63,7 +63,7 @@ class ExpressionDaoImplTest {
     @Test
     void generateExpression() {
         for(int i = 0; i < 10000; i++) {
-            Expre.expressionToString(Expre.generateExpression(10));
+            System.out.println(Expre.expressionToString(Expre.generateExpression(10)));
         }
     }
 }
