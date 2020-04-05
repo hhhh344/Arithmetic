@@ -2,6 +2,7 @@ package com.hh.dao.impl;
 
 import com.hh.dao.IExpressionDao;
 import com.hh.entity.Expression;
+import com.hh.entity.ExpressionList;
 import com.hh.entity.Pattern;
 
 import java.util.ArrayList;
@@ -162,12 +163,33 @@ public class ExpressionDaoImpl implements IExpressionDao {
 
     @Override
     public boolean isQualified(Integer[] result) {
-        return false;
+        if(result[0] == 4) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public List<Expression> generateMultiExpression(int number, int range) {
-        return null;
+    public boolean generateMultiExpression(int number, int range) {
+        Expression exp;
+        Integer[] result;
+        ExpressionList expList = new ExpressionList();
+        List<Expression> expressionsList = new ArrayList<>();
+        CalculateUtilsImpl cal = new CalculateUtilsImpl();
+        for (int i = 0; i < number; ) {
+            exp = generateExpression(range);
+            result = cal.getExpressionResult(exp);
+            if(isQualified(result)) {
+                exp.setResult(result);
+                expressionsList.add(exp);
+                i++;
+            }
+        }
+        if(expressionsList.size() == number) {
+            expList.setExpressionsList(expressionsList);
+            return true;
+        }
+        throw new RuntimeException("没有生成足够的表达式！！");
     }
 
 }

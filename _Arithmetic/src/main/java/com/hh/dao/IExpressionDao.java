@@ -70,5 +70,5 @@ public interface IExpressionDao {
      * @param range
      * @return 存有多个表达式的列表
      */
-    public List<Expression> generateMultiExpression(int number, int range);
+    public boolean generateMultiExpression(int number, int range);
 }

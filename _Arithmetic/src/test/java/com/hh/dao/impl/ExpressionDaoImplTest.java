@@ -1,5 +1,7 @@
 package com.hh.dao.impl;
 
+import com.hh.entity.Expression;
+import com.hh.entity.ExpressionList;
 import org.junit.jupiter.api.Test;
 
 
@@ -64,5 +66,13 @@ class ExpressionDaoImplTest {
         for(int i = 0; i < 10000; i++) {
             System.out.println(Expre.expressionToString(Expre.generateExpression(10)));
         }
+    }
+
+    @Test
+    void generateMultiExpression() {
+        ExpressionList expressionList = new ExpressionList();
+
+
+        System.out.println(Expre.generateMultiExpression(1000, 10));
     }
 }
