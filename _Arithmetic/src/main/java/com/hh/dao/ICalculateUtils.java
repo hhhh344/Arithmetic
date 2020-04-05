@@ -87,4 +87,11 @@ public interface ICalculateUtils {
      */
     public Integer[] toInteger(String num);
 
+    /**
+     * 将计算结果打印出来
+     * @param result 表达式结果
+     * @return 字符串
+     */
+    public String resultToString(Integer[] result);
+
 }

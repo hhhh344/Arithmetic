@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class ExpressionDaoImpl implements IExpressionDao {
 
-    private ExpressionList expressions = new ExpressionList();
+    public ExpressionList expressions = new ExpressionList();
     private Random rand = new Random();
 
     public ExpressionDaoImpl() {

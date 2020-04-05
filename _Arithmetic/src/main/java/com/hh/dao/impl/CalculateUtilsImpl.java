@@ -226,4 +226,16 @@ public class CalculateUtilsImpl implements ICalculateUtils {
         return a1;
     }
 
+    @Override
+    public String resultToString(Integer[] result) {
+        if(result[2] == 0){
+            return result[1].toString();
+        }
+        else if (result[1] == 0){
+            return result[2] + "/" + result[3];
+        }
+        else {
+            return result[1] + "'" + result[2] + "/" + result[3];
+        }
+    }
 }

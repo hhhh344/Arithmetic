@@ -23,10 +23,7 @@ public class Dispatch {
     static @ResponseBody
     String getParam(@RequestParam int number, @RequestParam int range) {
 
-
-        Param en = new Param();
-        en.setNumber(number);
-        en.setRange(range);
+        Param en = new Param(number, range);
         System.out.println("ex="+en.getNumber()+"ran="+en.getRange());
         return "ex="+en.getNumber()+"ran="+en.getRange();
     }

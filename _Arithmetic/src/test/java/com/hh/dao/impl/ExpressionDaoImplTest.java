@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class ExpressionDaoImplTest {
     private ExpressionDaoImpl Expre = new ExpressionDaoImpl();
+    private CalculateUtilsImpl Cal = new CalculateUtilsImpl();
 
     @Test
     void generateNaturalNum() {
@@ -70,9 +71,9 @@ class ExpressionDaoImplTest {
 
     @Test
     void generateMultiExpression() {
-        ExpressionList expressionList = new ExpressionList();
-
-
-        System.out.println(Expre.generateMultiExpression(1000, 10));
+        Expre.generateMultiExpression(1000, 10);
+        for (Expression item : Expre.expressions.getExpressionsList()){
+            System.out.println(Expre.expressionToString(item) + " " + Cal.resultToString(item.getResult()));
+        }
     }
 }
