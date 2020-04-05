@@ -116,51 +116,81 @@ public class CalculateUtilsImpl implements ICalculateUtils {
 
     @Override
     public Integer[] getExpressionResult(Stack<String> postfixExpression) {
+        ExpressionDaoImpl exp = new ExpressionDaoImpl();
+        Stack<Integer[]> S3 = new Stack<>();
+        Integer[] num1, num2;
 
-        return null;
+        for (String item : postfixExpression){
+            if(item.matches("[0-9]+")){
+                S3.push(toInteger(item));
+            }
+            if (item.matches("[\\+\\-\\*\\/]")){
+                num1 = S3.pop();
+                num2 = S3.pop();
+                S3.push(calculateTwoNumber(num1,num2,item));
+            }
+        }
+        if (S3.size()!=1){
+            throw new RuntimeException("栈内元素剩余多于1！");
+        }
+        return exp.getProperFraction(S3.peek());
     }
 
     @Override
     public Integer[] calculateTwoNumber(Integer[] num1, Integer[] num2, String op) {
         switch (op){
             case "+":
-
-                break;
+                return addition(num1, num2);
             case "-":
-                break;
+                return subtraction(num1, num2);
             case "*":
-                break;
+                return multiplication(num1, num2);
             case "/":
-                break;
+                return division(num1, num2);
             default:
                 throw new RuntimeException("没有该类型的运算符！");
         }
-        return new Integer[0];
     }
 
 
     @Override
     public Integer[] addition(Integer[] num1, Integer[] num2) {
-        return new Integer[0];
+//        a1+a2; b1c2+b2c1; c1c1;
+        num1[1] += num2[1];
+        num1[2] = num1[2]*num2[3] +num2[2]*num1[3];
+        num1[3] *=num2[3];
+        return num1;
     }
 
     @Override
     public Integer[] subtraction(Integer[] num1, Integer[] num2) {
+
         return new Integer[0];
     }
 
     @Override
     public Integer[] multiplication(Integer[] num1, Integer[] num2) {
-        return new Integer[0];
+//        0; (a1c1+b1)c2+(a2c2+b2)c1; c1c2
+//        a1*a2; a1b2c1+a2b1c2+b1b2; c1c2
+        num1[2] = num1[1]*num2[2]*num1[3] + num2[1]*num1[2]*num2[3] + num1[2]*num2[2];
+        num1[1] *= num2[1];
+        num1[3] *= num2[3];
+        return num1;
     }
 
     @Override
     public Integer[] division(Integer[] num1, Integer[] num2) {
+
         return new Integer[0];
     }
 
     @Override
     public Integer[] toInteger(String num) {
-        return new Integer[0];
+        Integer[] a1 = new Integer[4];
+        a1[0] = 1;
+        a1[1] = Integer.parseInt(num);
+        a1[2] = 0;
+        a1[3] = 1;
+        return a1;
     }
 }
