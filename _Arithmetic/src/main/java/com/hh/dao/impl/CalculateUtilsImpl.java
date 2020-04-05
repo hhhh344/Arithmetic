@@ -102,6 +102,7 @@ public class CalculateUtilsImpl implements ICalculateUtils {
                     //3.否则，将S1栈的栈顶运算符弹出，送入S2栈中，跳回1
                     else {
                         S2.push(S1.pop());
+                        i--;
                     }
                     break;
                 //若取出的字符是“（”，则直接送入S1栈顶。
