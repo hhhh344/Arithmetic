@@ -11,9 +11,10 @@ public class ExpressionList {
      */
     private List<Expression> expressionsList;
 
+
     public List<Expression> getExpressionsList() {
         return expressionsList;
-    }
+}
 
     public void setExpressionsList(List<Expression> expressionsList) {
         this.expressionsList = expressionsList;

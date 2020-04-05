@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class ExpressionDaoImpl implements IExpressionDao {
 
-    List<Expression> expressions = new ArrayList<Expression>();
+    private ExpressionList expressions = new ExpressionList();
     private Random rand = new Random();
 
     public ExpressionDaoImpl() {
@@ -173,7 +173,6 @@ public class ExpressionDaoImpl implements IExpressionDao {
     public boolean generateMultiExpression(int number, int range) {
         Expression exp;
         Integer[] result;
-        ExpressionList expList = new ExpressionList();
         List<Expression> expressionsList = new ArrayList<>();
         CalculateUtilsImpl cal = new CalculateUtilsImpl();
         for (int i = 0; i < number; ) {
@@ -186,7 +185,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
             }
         }
         if(expressionsList.size() == number) {
-            expList.setExpressionsList(expressionsList);
+            expressions.setExpressionsList(expressionsList);
             return true;
         }
         throw new RuntimeException("没有生成足够的表达式！！");

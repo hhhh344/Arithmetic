@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 
 class ExpressionDaoImplTest {
-    ExpressionDaoImpl Expre = new ExpressionDaoImpl();
+    private ExpressionDaoImpl Expre = new ExpressionDaoImpl();
 
     @Test
     void generateNaturalNum() {
