@@ -34,10 +34,10 @@ public interface ICalculateUtils {
 
     /**
      * 计算表达式的结果
-     * @param postfixExpression 后缀表达式栈
+     * @param expression 表达式
      * @return 表达式计算结果
      */
-    public Integer[]  getExpressionResult(Stack<String> postfixExpression);
+    public Integer[]  getExpressionResult(Expression expression);
 
     /**
      * 计算两个数的结果
@@ -86,6 +86,5 @@ public interface ICalculateUtils {
      * @return  自定义的类型
      */
     public Integer[] toInteger(String num);
-//    到时候，就新建一个Integer[]栈，用来存前面的操作数，写一个方法，专门将Stack<String>里面的数字转换为Integer[]，一次只读一个
-//    遇到操作符，则开始调用计算两个数的方法来计算，并且存入刚刚的Integer[]栈。
+
 }

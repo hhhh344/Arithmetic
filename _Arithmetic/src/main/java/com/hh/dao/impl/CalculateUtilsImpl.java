@@ -15,24 +15,35 @@ import java.util.Stack;
 public class CalculateUtilsImpl implements ICalculateUtils {
 
     @Override
-    public int getPriorityValue(String op) {
-        switch (op) {
-            case "#":
-                return 0;
-            case "+":
-            case "-":
-                return 1;
-            case "*":
-            case "/":
-                return 2;
-            default:
-                throw new RuntimeException("没有该类型的操作符!");
-        }
-    }
+    public Integer[] getExpressionResult(Expression expression) {
+        Stack<String> postfixExpression = getPostfixExpression(expression);
+        ExpressionDaoImpl exp = new ExpressionDaoImpl();
+        Stack<Integer[]> S3 = new Stack<>();
+        Integer[] num1, num2, temp;
 
-    @Override
-    public boolean comparePriority(String op1, String op2) {
-        return getPriorityValue(op1) > getPriorityValue(op2);
+        for (String item : postfixExpression){
+//            如果取出的元素是数字
+            if(item.matches("[0-9]+")){
+                S3.push(toInteger(item));
+            }
+//            如果取出的元素是操作符
+            else if (item.matches("[\\+\\-\\*\\/]")){
+//                栈顶元素应该在操作符后面
+                num2 = S3.pop();
+                num1 = S3.pop();
+                temp = calculateTwoNumber(num1,num2,item);
+//                如果两个数字不符合计算规则，除法出现被除数为零，减法出现负数
+                if(temp[0]==4){
+                    return temp;
+                }
+                S3.push(temp);
+            }
+        }
+        if (S3.size()!=1){
+            throw new RuntimeException("栈内元素剩余多于1！");
+        }
+        //将最终结果换为真分数
+        return exp.getProperFraction(S3.peek());
     }
 
 
@@ -114,27 +125,28 @@ public class CalculateUtilsImpl implements ICalculateUtils {
         return S2;
     }
 
-    @Override
-    public Integer[] getExpressionResult(Stack<String> postfixExpression) {
-        ExpressionDaoImpl exp = new ExpressionDaoImpl();
-        Stack<Integer[]> S3 = new Stack<>();
-        Integer[] num1, num2;
 
-        for (String item : postfixExpression){
-            if(item.matches("[0-9]+")){
-                S3.push(toInteger(item));
-            }
-            if (item.matches("[\\+\\-\\*\\/]")){
-                num1 = S3.pop();
-                num2 = S3.pop();
-                S3.push(calculateTwoNumber(num1,num2,item));
-            }
+    @Override
+    public int getPriorityValue(String op) {
+        switch (op) {
+            case "#":
+                return 0;
+            case "+":
+            case "-":
+                return 1;
+            case "*":
+            case "/":
+                return 2;
+            default:
+                throw new RuntimeException("没有该类型的操作符!");
         }
-        if (S3.size()!=1){
-            throw new RuntimeException("栈内元素剩余多于1！");
-        }
-        return exp.getProperFraction(S3.peek());
     }
+
+    @Override
+    public boolean comparePriority(String op1, String op2) {
+        return getPriorityValue(op1) > getPriorityValue(op2);
+    }
+
 
     @Override
     public Integer[] calculateTwoNumber(Integer[] num1, Integer[] num2, String op) {
@@ -164,8 +176,17 @@ public class CalculateUtilsImpl implements ICalculateUtils {
 
     @Override
     public Integer[] subtraction(Integer[] num1, Integer[] num2) {
-
-        return new Integer[0];
+//        0; (a1c1+b1)c2-(a2c2+b2)c1; c1c2;
+        int temp = (num1[1]*num1[3]+num1[2])*num2[3] - (num2[1]*num2[3]+num2[2])*num1[3];
+//        如果计算过程出现负数
+        if (temp < 0){
+            num1[0] = 4;
+            return num1;
+        }
+        num1[3] *=num2[3];
+        num1[2] = temp;
+        num1[1] = 0;
+        return num1;
     }
 
     @Override
@@ -180,8 +201,18 @@ public class CalculateUtilsImpl implements ICalculateUtils {
 
     @Override
     public Integer[] division(Integer[] num1, Integer[] num2) {
-
-        return new Integer[0];
+//        除数为零，将数组的第一个元素标记为4
+        if (num2[1]==0 && num2[2]==0){
+            num1[0] = 4;
+        }
+        else {
+//            0;（a1c1+b1)*c2; (a2c2+b2)*c1;
+            int temp = (num1[1]*num1[3]+num1[2])*num2[3];
+            num1[3] = (num2[1]*num2[3]+num2[2])*num1[3];
+            num1[2] = temp;
+            num1[1] = 0;
+        }
+        return num1;
     }
 
     @Override
@@ -193,4 +224,5 @@ public class CalculateUtilsImpl implements ICalculateUtils {
         a1[3] = 1;
         return a1;
     }
+
 }

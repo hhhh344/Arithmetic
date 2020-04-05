@@ -2,6 +2,8 @@ package com.hh.dao;
 
 import com.hh.entity.Expression;
 
+import java.util.List;
+
 /**
  * @author 戮漠
  *对表达式的操作的接口
@@ -54,4 +56,19 @@ public interface IExpressionDao {
      * @return 标准形式字符串
      */
     public String expressionToString(Expression exp);
+
+    /**
+     * 判断表达式是否合格
+     * @param result 计算结果
+     * @return 是否成功
+     */
+    public boolean isQualified (Integer[] result);
+
+    /**
+     * 生成多个表达式
+     * @param number
+     * @param range
+     * @return 存有多个表达式的列表
+     */
+    public List<Expression> generateMultiExpression(int number, int range);
 }

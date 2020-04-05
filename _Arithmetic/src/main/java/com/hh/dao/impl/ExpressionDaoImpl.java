@@ -55,7 +55,6 @@ public class ExpressionDaoImpl implements IExpressionDao {
         return exp;
     }
 
-
     @Override
     public Integer[] generateNaturalNum(int range) {
 
@@ -160,4 +159,15 @@ public class ExpressionDaoImpl implements IExpressionDao {
         returnString += "=";
         return returnString;
     }
+
+    @Override
+    public boolean isQualified(Integer[] result) {
+        return false;
+    }
+
+    @Override
+    public List<Expression> generateMultiExpression(int number, int range) {
+        return null;
+    }
+
 }
