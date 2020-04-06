@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ * 文件操作
  * @author 戮漠
- * 程序的入口
  */
 @SpringBootApplication
 public class HhApplication {

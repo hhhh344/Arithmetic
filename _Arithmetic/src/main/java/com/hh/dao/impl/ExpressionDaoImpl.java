@@ -6,13 +6,13 @@ import com.hh.entity.ExpressionList;
 import com.hh.entity.Pattern;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 /**
- * @author 戮漠
- *
  * 对表达式进行操作
+ * @author 戮漠
  */
 public class ExpressionDaoImpl implements IExpressionDao {
 
@@ -192,4 +192,12 @@ public class ExpressionDaoImpl implements IExpressionDao {
         throw new RuntimeException("没有生成足够的表达式！！");
     }
 
+    @Override
+    public Expression stringToExpression(String str) {
+        Expression exp = new Expression();
+        List<Integer[]> parameterList = new ArrayList<>();
+        List<String> operateList = new ArrayList<>();
+
+        return null;
+    }
 }

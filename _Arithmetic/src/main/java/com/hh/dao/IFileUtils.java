@@ -4,9 +4,11 @@ import com.hh.entity.Expression;
 import com.hh.entity.ExpressionList;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
+ * 文件操作的接口
  * @author 戮漠
  */
 public interface IFileUtils {
@@ -34,5 +36,11 @@ public interface IFileUtils {
      */
     public boolean writeAnswerInFile(File file, ExpressionList expressionList) throws IOException;
 
-
+    /**
+     * 判断表达式和计算结果是否一致
+     * @param expressionFile 表达式文件
+     * @param answerFile 答案文件
+     * @return 答案是否全部正确
+     */
+    public boolean writeGradeInFile(File expressionFile, File answerFile) throws IOException;
 }

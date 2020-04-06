@@ -14,7 +14,7 @@ class FileUtilsImplTest {
 
     @Test
     void createNewFile() throws IOException {
-        fui.createNewFile("test1.txt");
+        fui.createNewFile("writeTest1.txt");
     }
 
     @Test
@@ -26,8 +26,4 @@ class FileUtilsImplTest {
         System.out.println(fui.writeAnswerInFile(file2, exp.expressions));
     }
 
-    @Test
-    void writeAnswerInFile() {
-
-    }
 }

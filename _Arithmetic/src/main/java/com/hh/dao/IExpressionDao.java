@@ -5,8 +5,8 @@ import com.hh.entity.Expression;
 import java.util.List;
 
 /**
+ * 表达式操作的接口
  * @author 戮漠
- *对表达式的操作的接口
  */
 public interface IExpressionDao {
     /**
@@ -71,4 +71,11 @@ public interface IExpressionDao {
      * @return 存有多个表达式的列表
      */
     public boolean generateMultiExpression(int number, int range);
+
+    /**
+     * 将字符串表达式转化为规范表达式
+     * @param str 字符串表达式
+     * @return 规范表达式
+     */
+    public Expression stringToExpression(String str);
 }

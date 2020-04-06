@@ -4,14 +4,12 @@ import com.hh.dao.IFileUtils;
 import com.hh.entity.Expression;
 import com.hh.entity.ExpressionList;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.validation.constraints.Null;
+import java.io.*;
 
 /**
- * @author 戮漠
  * 文件操作
+ * @author 戮漠
  */
 public class FileUtilsImpl implements IFileUtils {
 
@@ -73,6 +71,23 @@ public class FileUtilsImpl implements IFileUtils {
             bw.newLine();
         }
         bw.close();
+        fw.close();
         return true;
+    }
+
+    @Override
+    public boolean writeGradeInFile(File expressionFile, File answerFile) throws IOException {
+        if(!expressionFile.exists()){
+            throw new FileNotFoundException();
+        }
+
+        ExpressionList expressionList = new ExpressionList();
+        FileReader fr = new FileReader(expressionFile);
+        BufferedReader br = new BufferedReader(fr);
+        String line = br.readLine();
+        while(line!= null){
+            line =
+        }
+        return false;
     }
 }

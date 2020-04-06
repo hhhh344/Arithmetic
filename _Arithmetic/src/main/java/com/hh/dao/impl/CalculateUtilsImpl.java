@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * @author 戮漠
- *
  * 计算
+ * @author 戮漠
  */
 
 public class CalculateUtilsImpl implements ICalculateUtils {
