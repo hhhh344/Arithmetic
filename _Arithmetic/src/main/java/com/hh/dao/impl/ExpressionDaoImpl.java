@@ -70,7 +70,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
         Integer[] fraction = new Integer[4];
         fraction[0] = 1;
         fraction[1] = rand.nextInt(range);
-        fraction[3] = rand.nextInt(range-2)+2;
+        fraction[3] = rand.nextInt(range-1)+2;
         //分子必须比分母小
         fraction[2] = rand.nextInt(fraction[3]-1)+1;
         //调用方法化简为真分数
@@ -175,7 +175,8 @@ public class ExpressionDaoImpl implements IExpressionDao {
         Integer[] result;
         List<Expression> expressionsList = new ArrayList<>();
         CalculateUtilsImpl cal = new CalculateUtilsImpl();
-        for (int i = 0; i < number; ) {
+        int i, j;
+        for (i = 0, j = 0; i < number && j < 100*number; j++) {
             exp = generateExpression(range);
             result = cal.getExpressionResult(exp);
             if(isQualified(result)) {

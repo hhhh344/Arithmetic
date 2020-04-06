@@ -13,6 +13,7 @@ import java.util.Stack;
  */
 
 public class CalculateUtilsImpl implements ICalculateUtils {
+    ExpressionDaoImpl expressionDao = new ExpressionDaoImpl();
 
     @Override
     public Integer[] getExpressionResult(Expression expression) {
@@ -173,7 +174,10 @@ public class CalculateUtilsImpl implements ICalculateUtils {
         num1[1] += num2[1];
         num1[2] = num1[2]*num2[3] +num2[2]*num1[3];
         num1[3] *=num2[3];
-        return num1;
+        if(num1[1] < 0 || num1[2] < 0 || num1[3] < 0) {
+            num1[0] = 4;
+        }
+        return expressionDao.getProperFraction(num1);
     }
 
     @Override
@@ -188,7 +192,10 @@ public class CalculateUtilsImpl implements ICalculateUtils {
         num1[3] *=num2[3];
         num1[2] = temp;
         num1[1] = 0;
-        return num1;
+        if(num1[1] < 0 || num1[2] < 0 || num1[3] < 0) {
+            num1[0] = 4;
+        }
+        return expressionDao.getProperFraction(num1);
     }
 
     @Override
@@ -198,7 +205,10 @@ public class CalculateUtilsImpl implements ICalculateUtils {
         num1[2] = num1[1]*num2[2]*num1[3] + num2[1]*num1[2]*num2[3] + num1[2]*num2[2];
         num1[1] *= num2[1];
         num1[3] *= num2[3];
-        return num1;
+        if(num1[1] < 0 || num1[2] < 0 || num1[3] < 0) {
+            num1[0] = 4;
+        }
+        return expressionDao.getProperFraction(num1);
     }
 
     @Override
@@ -206,6 +216,7 @@ public class CalculateUtilsImpl implements ICalculateUtils {
 //        除数为零，将数组的第一个元素标记为4
         if (num2[1]==0 && num2[2]==0){
             num1[0] = 4;
+            return num1;
         }
         else {
 //            0;（a1c1+b1)*c2; (a2c2+b2)*c1;
@@ -214,7 +225,10 @@ public class CalculateUtilsImpl implements ICalculateUtils {
             num1[2] = temp;
             num1[1] = 0;
         }
-        return num1;
+        if(num1[1] < 0 || num1[2] < 0 || num1[3] < 0) {
+            num1[0] = 4;
+        }
+        return expressionDao.getProperFraction(num1);
     }
 
     @Override
