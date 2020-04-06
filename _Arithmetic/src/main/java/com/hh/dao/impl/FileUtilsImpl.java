@@ -4,12 +4,11 @@ import com.hh.dao.IFileUtils;
 import com.hh.entity.Expression;
 import com.hh.entity.ExpressionList;
 
-import javax.validation.constraints.Null;
 import java.io.*;
 
 /**
- * 文件操作
  * @author 戮漠
+ * 文件操作
  */
 public class FileUtilsImpl implements IFileUtils {
 
@@ -71,7 +70,6 @@ public class FileUtilsImpl implements IFileUtils {
             bw.newLine();
         }
         bw.close();
-        fw.close();
         return true;
     }
 
@@ -86,7 +84,7 @@ public class FileUtilsImpl implements IFileUtils {
         BufferedReader br = new BufferedReader(fr);
         String line = br.readLine();
         while(line!= null){
-            line =
+
         }
         return false;
     }

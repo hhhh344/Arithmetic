@@ -14,16 +14,20 @@ class FileUtilsImplTest {
 
     @Test
     void createNewFile() throws IOException {
-        fui.createNewFile("writeTest1.txt");
+        fui.createNewFile("test1.txt");
     }
 
     @Test
     void writeExpressionInFile() throws IOException {
-        exp.generateMultiExpression(10, 3);
+        exp.generateMultiExpression(10000, 10);
         File file1 = fui.createNewFile("test1.txt");
         File file2 = fui.createNewFile("test2.txt");
         System.out.println(fui.writeExpressionInFile(file1, exp.expressions));
         System.out.println(fui.writeAnswerInFile(file2, exp.expressions));
     }
 
+    @Test
+    void writeAnswerInFile() {
+
+    }
 }

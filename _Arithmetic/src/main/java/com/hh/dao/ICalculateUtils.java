@@ -5,8 +5,8 @@ import com.hh.entity.Expression;
 import java.util.Stack;
 
 /**
- * 计算操作的接口
  * @author 戮漠
+ * 计算操作的接口
  */
 public interface ICalculateUtils {
 

@@ -76,4 +76,20 @@ class ExpressionDaoImplTest {
             System.out.println(Expre.expressionToString(item) + " " + Cal.resultToString(item.getResult()));
         }
     }
+
+    @Test
+    void stringToExpression() {
+        Expression expression;
+        String str;
+
+        for (int i = 0; i < 100; i++) {
+            expression = Expre.generateExpression(10);
+            str = Expre.expressionToString(expression);
+            System.out.println("转化前:" + str);
+            expression = Expre.stringToExpression(str);
+            str = Expre.expressionToString(expression);
+            System.out.println("转化后:" + str);
+            System.out.println(Cal.getPostfixExpression(expression));
+        }
+    }
 }

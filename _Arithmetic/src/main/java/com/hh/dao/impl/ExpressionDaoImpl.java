@@ -193,11 +193,60 @@ public class ExpressionDaoImpl implements IExpressionDao {
     }
 
     @Override
-    public Expression stringToExpression(String str) {
+    public Expression stringToExpression(String expressionString) {
         Expression exp = new Expression();
         List<Integer[]> parameterList = new ArrayList<>();
         List<String> operateList = new ArrayList<>();
+        String pattern = "";
+        String[] str = expressionString.split("\\s");
 
-        return null;
+        for (String item : str) {
+            if(item.matches("^[()]$")) {
+                pattern += item;
+            }
+            else if(item.matches("^[\\+\\-\\*÷]$")) {
+                if(item.equals("÷")) {
+                    operateList.add("/");
+                }
+                else {
+                    operateList.add(item);
+                }
+                pattern += "#";
+            }
+            //整数
+            else if(item.matches("^[0-9]+$")) {
+                pattern += "n";
+                Integer[] num = new Integer[2];
+                num[0] = 0;
+                num[1] = Integer.parseInt(item);
+                parameterList.add(num);
+            }
+            //分数
+            else if(item.matches("^([0-9]+')?[0-9]+\\/[0-9]+$")) {
+                pattern += "n";
+                Integer[] num = new Integer[4];
+                num[0] = 1;
+                if(item.contains("'")) {
+                    num[1] = Integer.parseInt(item.substring(0, item.indexOf("'")));
+                    num[2] = Integer.parseInt(item.substring(item.indexOf("'")+1, item.indexOf("/")));
+                }
+                else {
+                    num[1] = 0;
+                    num[2] = Integer.parseInt(item.substring(0, item.indexOf("/")));
+                }
+                num[3] = Integer.parseInt(item.substring(item.indexOf("/")+1));
+                parameterList.add(num);
+            }
+            else if(item.matches("^=$")) {
+
+            }
+            else {
+                throw new RuntimeException("将字符串表达式转化为Expression时出现了未知字符");
+            }
+        }
+        exp.setOperatorList(operateList);
+        exp.setParameterList(parameterList);
+        exp.setPattern(pattern);
+        return exp;
     }
 }
