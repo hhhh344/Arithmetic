@@ -71,7 +71,7 @@ class ExpressionDaoImplTest {
 
     @Test
     void generateMultiExpression() {
-        Expre.generateMultiExpression(1000, 10);
+        Expre.generateMultiExpression(1, 10);
         for (Expression item : Expre.expressions.getExpressionsList()){
             System.out.println(Expre.expressionToString(item) + " " + Cal.resultToString(item.getResult()));
         }

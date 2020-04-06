@@ -43,7 +43,8 @@ public class CalculateUtilsImpl implements ICalculateUtils {
             throw new RuntimeException("栈内元素剩余多于1！");
         }
         //将最终结果换为真分数
-        return exp.getProperFraction(S3.peek());
+        Integer[] result = exp.getProperFraction(S3.peek());
+        return result;
     }
 
 

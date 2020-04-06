@@ -25,7 +25,7 @@ class CalculateUtilsImplTest {
     void getExpressionResult() {
         Expression temp;
         for (int i = 0; i < 10000; i++) {
-            temp = exp.generateExpression(10);
+            temp = exp.generateExpression(1000);
             System.out.println(exp.expressionToString(temp));
             System.out.println(cal.getPostfixExpression(temp));
             for (int item : cal.getExpressionResult(temp)){
