@@ -30,6 +30,7 @@ class FileUtilsImplTest {
     void writeGradeInFile() throws IOException {
         File expressionFile = new File("file/test1.txt");
         File answerFile = new File("file/test2.txt");
-        System.out.println(fui.writeGradeInFile(expressionFile, answerFile));
+        File gradeFile = new File("file/test3.txt");
+        System.out.println(fui.writeGradeInFile(expressionFile, answerFile, gradeFile));
     }
 }

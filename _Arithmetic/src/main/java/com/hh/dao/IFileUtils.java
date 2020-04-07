@@ -40,9 +40,10 @@ public interface IFileUtils {
      * 判断表达式和计算结果是否一致
      * @param expressionFile 表达式文件
      * @param answerFile 答案文件
+     * @param gradeFile 统计文件
      * @return 答案是否全部正确
      */
-    public boolean writeGradeInFile(File expressionFile, File answerFile) throws IOException;
+    public boolean writeGradeInFile(File expressionFile, File answerFile, File gradeFile) throws IOException;
 
     /**
      * 获取表达式的题号和结果

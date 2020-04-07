@@ -17,28 +17,6 @@ import java.util.Map;
  */
 public class FileUtilsImpl implements IFileUtils {
 
-    /*ExpressionDaoImpl exp = new ExpressionDaoImpl();
-    public void test () throws IOException {
-        File file = new File("file/test2.txt");
-        if(!file.exists()) {
-            file.createNewFile();
-        }
-        else {
-            file.delete();
-            file.createNewFile();
-        }
-
-        exp.generateMultiExpression(10, 10);
-        FileWriter fw = new FileWriter(file);
-        BufferedWriter bw = new BufferedWriter(fw);
-
-        for(Expression expression : exp.expressions.getExpressionsList()) {
-            bw.write(exp.expressionToString(expression)+ "\n");
-        }
-
-        bw.close();
-    }*/
-
     ExpressionDaoImpl exp = new ExpressionDaoImpl();
     CalculateUtilsImpl cal = new CalculateUtilsImpl();
 
@@ -85,9 +63,8 @@ public class FileUtilsImpl implements IFileUtils {
     }
 
     @Override
-    public boolean writeGradeInFile(File expressionFile, File answerFile) throws IOException {
-        File grade = createNewFile("Grade.txt");
-        FileWriter fw = new FileWriter(grade);
+    public boolean writeGradeInFile(File expressionFile, File answerFile, File gradeFile) throws IOException {
+        FileWriter fw = new FileWriter(gradeFile);
         BufferedWriter bw = new BufferedWriter(fw);
         Map<Integer, String> expressionFileMap = getExpressionFileMap(expressionFile);
         Map<Integer, String> answerFileMap = getAnswerFileMap(answerFile);
