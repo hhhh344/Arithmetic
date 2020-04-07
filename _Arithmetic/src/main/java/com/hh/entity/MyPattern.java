@@ -7,7 +7,7 @@ import java.util.Map;
  * @author 戮漠
  * 表达式的模型
  */
-public class Pattern {
+public class MyPattern {
 
     public static final Map<Integer, String> PATTERN_MAP = new HashMap<Integer, String>();
 

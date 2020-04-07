@@ -83,7 +83,7 @@ class ExpressionDaoImplTest {
         String str;
 
         for (int i = 0; i < 100; i++) {
-            expression = Expre.generateExpression(10);
+            expression = Expre.generateExpression(2);
             str = Expre.expressionToString(expression);
             System.out.println("转化前:" + str);
             expression = Expre.stringToExpression(str);

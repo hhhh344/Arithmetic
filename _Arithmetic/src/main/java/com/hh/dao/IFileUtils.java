@@ -4,7 +4,9 @@ import com.hh.entity.Expression;
 import com.hh.entity.ExpressionList;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author 戮漠
@@ -42,5 +44,18 @@ public interface IFileUtils {
      */
     public boolean writeGradeInFile(File expressionFile, File answerFile) throws IOException;
 
+    /**
+     * 获取表达式的题号和结果
+     * @param expressionFile 表达式文件
+     * @return 题号和结果的Map序列
+     */
+    public Map<Integer, String> getExpressionFileMap(File expressionFile) throws IOException;
+
+    /**
+     * 获取题号和答案
+     * @param answerFile 答案文件
+     * @return 题号和答案的Map序列
+     */
+    public Map<Integer, String> getAnswerFileMap(File answerFile) throws IOException;
 
 }

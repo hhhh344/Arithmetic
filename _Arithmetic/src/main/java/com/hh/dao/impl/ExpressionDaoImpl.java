@@ -3,10 +3,9 @@ package com.hh.dao.impl;
 import com.hh.dao.IExpressionDao;
 import com.hh.entity.Expression;
 import com.hh.entity.ExpressionList;
-import com.hh.entity.Pattern;
+import com.hh.entity.MyPattern;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -103,7 +102,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
     @Override
     public String generatePattern() {
         int temp = rand.nextInt(14);
-        return Pattern.PATTERN_MAP.get(temp);
+        return MyPattern.PATTERN_MAP.get(temp);
     }
 
     @Override
@@ -237,11 +236,11 @@ public class ExpressionDaoImpl implements IExpressionDao {
                 num[3] = Integer.parseInt(item.substring(item.indexOf("/")+1));
                 parameterList.add(num);
             }
-            else if(item.matches("^=$")) {
+            else if(item.matches("^=$") || !item.equals(" ")) {
 
             }
             else {
-                throw new RuntimeException("将字符串表达式转化为Expression时出现了未知字符");
+                throw new RuntimeException("将字符串表达式转化为Expression时出现了未知字符" + item);
             }
         }
         exp.setOperatorList(operateList);
