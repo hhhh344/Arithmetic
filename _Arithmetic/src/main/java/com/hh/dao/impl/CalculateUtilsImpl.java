@@ -40,7 +40,7 @@ public class CalculateUtilsImpl implements ICalculateUtils {
             }
         }
         if (S3.size()!=1){
-            throw new RuntimeException("栈内元素剩余多于1！");
+            throw new RuntimeException("栈内元素剩余不等于1！" + S3.toString());
         }
         //将最终结果换为真分数
         Integer[] result = exp.getProperFraction(S3.peek());

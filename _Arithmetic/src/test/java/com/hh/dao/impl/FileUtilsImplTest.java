@@ -19,7 +19,7 @@ class FileUtilsImplTest {
 
     @Test
     void writeExpressionInFile() throws IOException {
-        exp.generateMultiExpression(10, 10);
+        exp.generateMultiExpression(100, 10);
         File file1 = fui.createNewFile("test1.txt");
         File file2 = fui.createNewFile("test2.txt");
         System.out.println(fui.writeExpressionInFile(file1, exp.expressions));
@@ -30,10 +30,6 @@ class FileUtilsImplTest {
     void writeGradeInFile() throws IOException {
         File expressionFile = new File("file/test1.txt");
         File answerFile = new File("file/test2.txt");
-        if(!expressionFile.exists() || !answerFile.exists()) {
-            System.out.println("找不到文件");
-            return;
-        }
         System.out.println(fui.writeGradeInFile(expressionFile, answerFile));
     }
 }

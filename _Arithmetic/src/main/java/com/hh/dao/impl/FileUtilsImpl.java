@@ -59,9 +59,12 @@ public class FileUtilsImpl implements IFileUtils {
         int index = 1;
         for (Expression expression : expressionList.getExpressionsList()) {
             bw.write(index++ + ". " + exp.expressionToString(expression));
-            bw.newLine();
+            if (expressionList.getExpressionsList().size() != index-1) {
+                bw.newLine();
+            }
         }
         bw.close();
+        fw.close();
         return true;
     }
 
@@ -72,9 +75,12 @@ public class FileUtilsImpl implements IFileUtils {
         int index = 1;
         for (Expression expression : expressionList.getExpressionsList()) {
             bw.write(index++ + ". " + cal.resultToString(expression.getResult()));
-            bw.newLine();
+            if (expressionList.getExpressionsList().size() != index-1) {
+                bw.newLine();
+            }
         }
         bw.close();
+        fw.close();
         return true;
     }
 
@@ -173,7 +179,9 @@ public class FileUtilsImpl implements IFileUtils {
         while(line != null && line != "\n") {
             answerString = line.split(" ");
             number = Integer.parseInt(answerString[0].substring(0, answerString[0].indexOf(".")));
-            answerFileMap.put(number, answerString[1]);
+            if (answerString.length == 2) {
+                answerFileMap.put(number, answerString[1]);
+            }
             line = br.readLine();
         }
 
