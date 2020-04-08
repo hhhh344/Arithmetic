@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
+ * 文件操作的接口
  * @author 戮漠
  */
 public interface IFileUtils {

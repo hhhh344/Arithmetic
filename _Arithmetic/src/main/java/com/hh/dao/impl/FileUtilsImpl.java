@@ -12,8 +12,8 @@ import java.util.Map;
 
 
 /**
- * @author 戮漠
  * 文件操作
+ * @author 戮漠
  */
 public class FileUtilsImpl implements IFileUtils {
 

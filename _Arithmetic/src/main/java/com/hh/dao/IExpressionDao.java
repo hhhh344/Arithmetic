@@ -5,8 +5,8 @@ import com.hh.entity.Expression;
 import java.util.List;
 
 /**
+ * 对表达式的操作的接口
  * @author 戮漠
- *对表达式的操作的接口
  */
 public interface IExpressionDao {
     /**

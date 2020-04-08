@@ -3,12 +3,10 @@ package com.hh.entity;
 import java.util.List;
 
 /**
+ * 表达式列表
  * @author hh
  */
 public class ExpressionList {
-    /**
-     * 表达式列表
-     */
     private List<Expression> expressionsList;
 
     public List<Expression> getExpressionsList() {

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author 戮漠
  * 表达式的模型
+ * @author 戮漠
  */
 public class MyPattern {
 
