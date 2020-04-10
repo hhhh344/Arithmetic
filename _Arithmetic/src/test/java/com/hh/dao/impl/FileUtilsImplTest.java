@@ -14,11 +14,17 @@ class FileUtilsImplTest {
 
     @Test
     void createNewFile() throws IOException {
+        /**
+         * 创建一个新文件
+         */
         fui.createNewFile("test1.txt");
     }
 
     @Test
     void writeExpressionInFile() throws IOException {
+        /**
+         * 将表达式写入文件
+         */
         exp.generateMultiExpression(100, 10);
         File file1 = fui.createNewFile("test1.txt");
         File file2 = fui.createNewFile("test2.txt");
@@ -28,6 +34,9 @@ class FileUtilsImplTest {
 
     @Test
     void writeGradeInFile() throws IOException {
+        /**
+         * 将统计结果写入文件
+         */
         File expressionFile = new File("file/test1.txt");
         File answerFile = new File("file/test2.txt");
         File gradeFile = new File("file/test3.txt");

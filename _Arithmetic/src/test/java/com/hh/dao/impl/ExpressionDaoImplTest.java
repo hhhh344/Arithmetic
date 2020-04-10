@@ -11,6 +11,9 @@ class ExpressionDaoImplTest {
 
     @Test
     void generateNaturalNum() {
+        /**
+         * 生成自然数
+         */
         for (int i =0;i<10;i++){
             System.out.println(Expre.generateNaturalNum(11)[1]);
         }
@@ -18,6 +21,9 @@ class ExpressionDaoImplTest {
 
     @Test
     void generateOperator() {
+        /**
+         * 生成操作符
+         */
         for(int i=0;i<10;i++){
             System.out.println(Expre.generateOperator());
         }
@@ -25,6 +31,9 @@ class ExpressionDaoImplTest {
 
     @Test
     void generatePattern() {
+        /**
+         * 生成模式
+         */
         for (int i=0;i<10;i++){
             System.out.println(Expre.generatePattern());
         }
@@ -32,6 +41,9 @@ class ExpressionDaoImplTest {
 
     @Test
     void generateFraction() {
+        /**
+         * 生成分数
+         */
         Integer[] fra;
         for(int i=0;i<100;i++){
             fra = Expre.generateFraction(100);
@@ -45,6 +57,9 @@ class ExpressionDaoImplTest {
 
     @Test
     void getProperFraction() {
+        /**
+         * 化简分数
+         */
         Integer[] fra;
         for(int i=0;i<100;i++){
             fra = Expre.generateFraction(100);
@@ -64,6 +79,9 @@ class ExpressionDaoImplTest {
 
     @Test
     void generateExpression() {
+        /**
+         * 生成一个完整的表达式
+         */
         for(int i = 0; i < 10000; i++) {
             System.out.println(Expre.expressionToString(Expre.generateExpression(10)));
         }
@@ -71,7 +89,10 @@ class ExpressionDaoImplTest {
 
     @Test
     void generateMultiExpression() {
-        Expre.generateMultiExpression(1, 10);
+        /**
+         * 一次生成多道表达式
+         */
+        Expre.generateMultiExpression(100, 10);
         for (Expression item : Expre.expressions.getExpressionsList()){
             System.out.println(Expre.expressionToString(item) + " " + Cal.resultToString(item.getResult()));
         }
@@ -79,6 +100,9 @@ class ExpressionDaoImplTest {
 
     @Test
     void stringToExpression() {
+        /**
+         * 将字符串表达式化为自定义表达式
+         */
         Expression expression;
         String str;
 

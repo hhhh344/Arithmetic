@@ -14,6 +14,9 @@ class CalculateUtilsImplTest {
 
     @Test
     void getPostfixExpression() {
+        /**
+         * 将表达式转化为后缀表达式
+         */
         for(int i = 0; i < 100; i++) {
             Expression expression = exp.generateExpression(33);
             System.out.println(exp.expressionToString(expression));
@@ -23,6 +26,9 @@ class CalculateUtilsImplTest {
 
     @Test
     void getExpressionResult() {
+        /**
+         * 计算表达式结果
+         */
         Expression temp;
         for (int i = 0; i < 10000; i++) {
             temp = exp.generateExpression(1000);
@@ -37,6 +43,9 @@ class CalculateUtilsImplTest {
 
     @Test
     void addition() {
+        /**
+         * 加法
+         */
         for (int i = 0; i < 20; i++) {
             Integer[] num1, num2;
             num1 = exp.generateFraction(10);
@@ -59,6 +68,9 @@ class CalculateUtilsImplTest {
 
     @Test
     void subtraction() {
+        /**
+         * 减法
+         */
         for (int i = 0; i < 20; i++) {
             Integer[] num1, num2;
             num1 = exp.generateFraction(10);
@@ -81,6 +93,9 @@ class CalculateUtilsImplTest {
 
     @Test
     void multiplication() {
+        /**
+         * 乘法
+         */
         for (int i = 0; i < 20; i++) {
             Integer[] num1, num2;
             num1 = exp.generateFraction(10);
@@ -103,6 +118,9 @@ class CalculateUtilsImplTest {
 
     @Test
     void division() {
+        /**
+         * 除法
+         */
         for (int i = 0; i < 100; i++) {
             Integer[] num1, num2;
             num1 = exp.generateFraction(10);

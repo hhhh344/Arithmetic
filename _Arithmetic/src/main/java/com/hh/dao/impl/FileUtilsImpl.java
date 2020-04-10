@@ -151,7 +151,7 @@ public class FileUtilsImpl implements IFileUtils {
         String line = br.readLine();
 
         Integer number;
-        String answerString[];
+        String[] answerString;
 
         while(line != null && line != "\n") {
             answerString = line.split(" ");

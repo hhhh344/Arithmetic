@@ -204,7 +204,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
                 pattern += item;
             }
             else if(item.matches("^[\\+\\-\\*÷]$")) {
-                if(item.equals("÷")) {
+                if("÷".equals(item)) {
                     operateList.add("/");
                 }
                 else {
@@ -236,7 +236,7 @@ public class ExpressionDaoImpl implements IExpressionDao {
                 num[3] = Integer.parseInt(item.substring(item.indexOf("/")+1));
                 parameterList.add(num);
             }
-            else if(item.matches("^=$") || !item.equals(" ")) {
+            else if(item.matches("^=$") || !" ".equals(item)) {
 
             }
             else {
