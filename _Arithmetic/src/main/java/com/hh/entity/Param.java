@@ -18,6 +18,10 @@ public class Param {
     private int number;
     private int range;
 
+    public Param() {
+
+    }
+
     public Param(int number, int range) {
         this.number = number;
         this.range = range;

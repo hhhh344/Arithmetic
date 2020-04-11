@@ -126,7 +126,6 @@ public class ExpressionDaoImpl implements IExpressionDao {
                 case ')':
                     returnString += temp + " ";
                     break;
-
                 case 'n':
                     num = parameterList.get(parameterIndex++);
                     if(num[0] == 0) {
@@ -142,7 +141,6 @@ public class ExpressionDaoImpl implements IExpressionDao {
                         }
                     }
                     break;
-
                 case '#':
                     operator = operatorList.get(operatorIndex++);
                     if(operator.contains("/")) {
@@ -152,43 +150,11 @@ public class ExpressionDaoImpl implements IExpressionDao {
                         returnString += operator + " ";
                     }
                     break;
-
                 default: ;
             }
         }
         returnString += "=";
         return returnString;
-    }
-
-    @Override
-    public boolean isQualified(Integer[] result) {
-        if(result[0] == 4) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean generateMultiExpression(int number, int range) {
-        Expression exp;
-        Integer[] result;
-        List<Expression> expressionsList = new ArrayList<>();
-        CalculateUtilsImpl cal = new CalculateUtilsImpl();
-        int i, j;
-        for (i = 0, j = 0; i < number && j < 100*number; j++) {
-            exp = generateExpression(range);
-            result = cal.getExpressionResult(exp);
-            if(isQualified(result)) {
-                exp.setResult(result);
-                expressionsList.add(exp);
-                i++;
-            }
-        }
-        if(expressionsList.size() == number) {
-            expressions.setExpressionsList(expressionsList);
-            return true;
-        }
-        throw new RuntimeException("没有生成足够的表达式！！");
     }
 
     @Override
@@ -247,5 +213,36 @@ public class ExpressionDaoImpl implements IExpressionDao {
         exp.setParameterList(parameterList);
         exp.setPattern(pattern);
         return exp;
+    }
+
+    @Override
+    public boolean generateMultiExpression(int number, int range) {
+        Expression exp;
+        Integer[] result;
+        List<Expression> expressionsList = new ArrayList<>();
+        CalculateUtilsImpl cal = new CalculateUtilsImpl();
+        int i, j;
+        for (i = 0, j = 0; i < number && j < 100*number; j++) {
+            exp = generateExpression(range);
+            result = cal.getExpressionResult(exp);
+            if(isQualified(result)) {
+                exp.setResult(result);
+                expressionsList.add(exp);
+                i++;
+            }
+        }
+        if(expressionsList.size() == number) {
+            expressions.setExpressionsList(expressionsList);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isQualified(Integer[] result) {
+        if(result[0] == 4) {
+            return false;
+        }
+        return true;
     }
 }

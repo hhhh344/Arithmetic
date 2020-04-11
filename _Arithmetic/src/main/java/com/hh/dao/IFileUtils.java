@@ -3,6 +3,7 @@ package com.hh.dao;
 import com.hh.entity.Expression;
 import com.hh.entity.ExpressionList;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -60,4 +61,10 @@ public interface IFileUtils {
      */
     public Map<Integer, String> getAnswerFileMap(File answerFile) throws IOException;
 
+    /**
+     * 下载文件
+     * @param filename 文件名
+     * @param response  响应
+     */
+    public void download(String filename, HttpServletResponse response) throws IOException;
 }

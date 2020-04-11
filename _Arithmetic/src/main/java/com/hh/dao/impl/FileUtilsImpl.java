@@ -4,6 +4,7 @@ import com.hh.dao.IFileUtils;
 import com.hh.entity.Expression;
 import com.hh.entity.ExpressionList;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -165,5 +166,21 @@ public class FileUtilsImpl implements IFileUtils {
         br.close();
         fr.close();
         return answerFileMap;
+    }
+
+    @Override
+    public void download(String filename, HttpServletResponse response) throws IOException {
+        // 发送给客户端的数据
+        OutputStream outputStream = response.getOutputStream();
+        byte[] buff = new byte[1024];
+        BufferedInputStream bis = null;
+        // 读取filename
+        bis = new BufferedInputStream(new FileInputStream(new File("file/" + filename)));
+        int i = bis.read(buff);
+        while (i != -1) {
+            outputStream.write(buff, 0, buff.length);
+            outputStream.flush();
+            i = bis.read(buff);
+        }
     }
 }
