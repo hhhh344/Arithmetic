@@ -6,6 +6,7 @@ import com.hh.entity.ExpressionList;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -173,14 +174,17 @@ public class FileUtilsImpl implements IFileUtils {
         // 发送给客户端的数据
         OutputStream outputStream = response.getOutputStream();
         byte[] buff = new byte[1024];
-        BufferedInputStream bis = null;
         // 读取filename
-        bis = new BufferedInputStream(new FileInputStream(new File("file/" + filename)));
+        File file = new File("file/" + filename);
+        FileInputStream fis = new FileInputStream(file);
+        BufferedInputStream bis = new BufferedInputStream(fis);
         int i = bis.read(buff);
         while (i != -1) {
             outputStream.write(buff, 0, buff.length);
             outputStream.flush();
             i = bis.read(buff);
         }
+        bis.close();
+        fis.close();
     }
 }
