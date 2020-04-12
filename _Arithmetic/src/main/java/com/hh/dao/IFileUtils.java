@@ -2,6 +2,7 @@ package com.hh.dao;
 
 import com.hh.entity.Expression;
 import com.hh.entity.ExpressionList;
+import org.json.JSONArray;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -28,7 +29,7 @@ public interface IFileUtils {
      * @param expressionList 表达式列表
      * @return 是否成功写入
      */
-    public boolean writeExpressionInFile(File file, ExpressionList expressionList) throws IOException;
+    public boolean writeExpressionInFile(File file, JSONArray expressionList) throws IOException;
 
     /**
      * 将答案写入文件
@@ -36,7 +37,7 @@ public interface IFileUtils {
      * @param expressionList 表达式列表
      * @return 是否成功写入
      */
-    public boolean writeAnswerInFile(File file, ExpressionList expressionList) throws IOException;
+    public boolean writeAnswerInFile(File file, JSONArray expressionList) throws IOException;
 
     /**
      * 判断表达式和计算结果是否一致
@@ -48,11 +49,20 @@ public interface IFileUtils {
     public boolean writeGradeInFile(File expressionFile, File answerFile, File gradeFile) throws IOException;
 
     /**
+     * 获取表达式的题号和表达式字符串
+     * @param expressionFile 表达式文件
+     * @return 题号和表达式的Map序列
+     * @throws IOException
+     */
+    public Map<Integer, String> getExpressionFileMap(File expressionFile) throws IOException;
+
+    /**
      * 获取表达式的题号和结果
      * @param expressionFile 表达式文件
      * @return 题号和结果的Map序列
+     * @throws IOException
      */
-    public Map<Integer, String> getExpressionFileMap(File expressionFile) throws IOException;
+    public Map<Integer, String> getExpressionFileAnswerMap(File expressionFile) throws IOException;
 
     /**
      * 获取题号和答案
@@ -62,9 +72,11 @@ public interface IFileUtils {
     public Map<Integer, String> getAnswerFileMap(File answerFile) throws IOException;
 
     /**
-     * 下载文件
-     * @param filename 文件名
-     * @param response  响应
+     * 获取json序列(num,expression,answer,result,correctness)
+     * @param expressionFile 表达式文件
+     * @param answerFile 答案文件
+     * @return json序列
+     * @throws IOException
      */
-    public void download(String filename, HttpServletResponse response) throws IOException;
+    public JSONArray mapToJSON(File expressionFile, File answerFile) throws IOException;
 }

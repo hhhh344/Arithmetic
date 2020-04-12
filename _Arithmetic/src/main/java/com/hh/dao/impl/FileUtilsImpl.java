@@ -3,6 +3,8 @@ package com.hh.dao.impl;
 import com.hh.dao.IFileUtils;
 import com.hh.entity.Expression;
 import com.hh.entity.ExpressionList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -33,13 +35,13 @@ public class FileUtilsImpl implements IFileUtils {
     }
 
     @Override
-    public boolean writeExpressionInFile(File file, ExpressionList expressionList) throws IOException {
+    public boolean writeExpressionInFile(File file, JSONArray expressionList) throws IOException {
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
-        int index = 1;
-        for (Expression expression : expressionList.getExpressionsList()) {
-            bw.write(index++ + ". " + exp.expressionToString(expression));
-            if (expressionList.getExpressionsList().size() != index-1) {
+
+        for (int index = 0; index < expressionList.length(); index++) {
+            bw.write(index+1 + ". " + expressionList.getJSONObject(index).get("expression"));
+            if (expressionList.length() != index + 1) {
                 bw.newLine();
             }
         }
@@ -49,13 +51,13 @@ public class FileUtilsImpl implements IFileUtils {
     }
 
     @Override
-    public boolean writeAnswerInFile(File file, ExpressionList expressionList) throws IOException {
+    public boolean writeAnswerInFile(File file, JSONArray expressionList) throws IOException {
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
-        int index = 1;
-        for (Expression expression : expressionList.getExpressionsList()) {
-            bw.write(index++ + ". " + cal.resultToString(expression.getResult()));
-            if (expressionList.getExpressionsList().size() != index-1) {
+
+        for (int index = 0; index < expressionList.length(); index++) {
+            bw.write(index+1 + ". " + expressionList.getJSONObject(index).get("answer"));
+            if (expressionList.length() != index + 1) {
                 bw.newLine();
             }
         }
@@ -68,7 +70,7 @@ public class FileUtilsImpl implements IFileUtils {
     public boolean writeGradeInFile(File expressionFile, File answerFile, File gradeFile) throws IOException {
         FileWriter fw = new FileWriter(gradeFile);
         BufferedWriter bw = new BufferedWriter(fw);
-        Map<Integer, String> expressionFileMap = getExpressionFileMap(expressionFile);
+        Map<Integer, String> expressionFileMap = getExpressionFileAnswerMap(expressionFile);
         Map<Integer, String> answerFileMap = getAnswerFileMap(answerFile);
 
         int correctCount = 0;
@@ -129,6 +131,28 @@ public class FileUtilsImpl implements IFileUtils {
         String line = br.readLine();
 
         Integer number;
+        String expression;
+
+        while(line != null && line != "\n") {
+            number = Integer.parseInt(line.substring(0, line.indexOf(".")));
+            expression = line.substring(line.indexOf(".")+1);
+            expressionFileMap.put(number, expression);
+            line = br.readLine();
+        }
+
+        br.close();
+        fr.close();
+        return expressionFileMap;
+    }
+
+    @Override
+    public Map<Integer, String> getExpressionFileAnswerMap(File expressionFile) throws IOException {
+        FileReader fr = new FileReader(expressionFile);
+        BufferedReader br = new BufferedReader(fr);
+        Map<Integer, String> expressionFileAnswerMap = new HashMap<>();
+        String line = br.readLine();
+
+        Integer number;
         Integer[] result;
         Expression expression;
 
@@ -136,13 +160,13 @@ public class FileUtilsImpl implements IFileUtils {
             number = Integer.parseInt(line.substring(0, line.indexOf(".")));
             expression = exp.stringToExpression(line.substring(line.indexOf(".")+1));
             result = cal.getExpressionResult(expression);
-            expressionFileMap.put(number, cal.resultToString(result));
+            expressionFileAnswerMap.put(number, cal.resultToString(result));
             line = br.readLine();
         }
 
         br.close();
         fr.close();
-        return expressionFileMap;
+        return expressionFileAnswerMap;
     }
 
     @Override
@@ -170,21 +194,30 @@ public class FileUtilsImpl implements IFileUtils {
     }
 
     @Override
-    public void download(String filename, HttpServletResponse response) throws IOException {
-        // 发送给客户端的数据
-        OutputStream outputStream = response.getOutputStream();
-        byte[] buff = new byte[1024];
-        // 读取filename
-        File file = new File("file/" + filename);
-        FileInputStream fis = new FileInputStream(file);
-        BufferedInputStream bis = new BufferedInputStream(fis);
-        int i = bis.read(buff);
-        while (i != -1) {
-            outputStream.write(buff, 0, buff.length);
-            outputStream.flush();
-            i = bis.read(buff);
+    public JSONArray mapToJSON(File expressionFile, File answerFile) throws IOException {
+        Map<Integer, String> expressionMap = getExpressionFileMap(expressionFile);
+        Map<Integer, String> resultMap = getExpressionFileAnswerMap(expressionFile);
+        Map<Integer, String> answerMap = getAnswerFileMap(answerFile);
+        JSONArray json = new JSONArray();
+        for(Map.Entry<Integer, String> item : expressionMap.entrySet()) {
+            Integer key = item.getKey();
+            String result = resultMap.get(key);
+            String answer = answerMap.get(key);
+            JSONObject jo = new JSONObject();
+            jo.put("num", key);
+            jo.put("expression", item.getValue());
+            jo.put("result", result);
+            jo.put("answer", answer);
+            if(result.equals(answer)) {
+                jo.put("correctness", "正确");
+            }
+            else {
+                jo.put("correctness", "错误");
+            }
+            json.put(jo);
         }
-        bis.close();
-        fis.close();
+        File gradeFile = createNewFile("Grade.txt");
+        writeGradeInFile(expressionFile, answerFile, gradeFile);
+        return json;
     }
 }

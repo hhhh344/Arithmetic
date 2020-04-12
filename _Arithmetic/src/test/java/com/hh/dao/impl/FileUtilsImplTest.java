@@ -1,5 +1,9 @@
 package com.hh.dao.impl;
 
+import com.hh.entity.Expression;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -11,7 +15,7 @@ class FileUtilsImplTest {
 
     FileUtilsImpl fui = new FileUtilsImpl();
     ExpressionDaoImpl exp = new ExpressionDaoImpl();
-
+    CalculateUtilsImpl cal = new CalculateUtilsImpl();
     @Test
     void createNewFile() throws IOException {
         /**
@@ -21,15 +25,24 @@ class FileUtilsImplTest {
     }
 
     @Test
-    void writeExpressionInFile() throws IOException {
+    void writeExpressionInFile() throws IOException, JSONException {
         /**
          * 将表达式写入文件
          */
         exp.generateMultiExpression(100, 10);
         File file1 = fui.createNewFile("test1.txt");
         File file2 = fui.createNewFile("test2.txt");
-        System.out.println(fui.writeExpressionInFile(file1, exp.expressions));
-        System.out.println(fui.writeAnswerInFile(file2, exp.expressions));
+        JSONArray json = new JSONArray();
+        int index = 1;
+        for(Expression expression : exp.expressions.getExpressionsList()) {
+            JSONObject jo = new JSONObject();
+            jo.put("num", index++);
+            jo.put("expression", exp.expressionToString(expression));
+            jo.put("answer", cal.resultToString(expression.getResult()));
+            json.put(jo);
+        }
+        System.out.println(fui.writeExpressionInFile(file1, json));
+        System.out.println(fui.writeAnswerInFile(file2, json));
     }
 
     @Test
