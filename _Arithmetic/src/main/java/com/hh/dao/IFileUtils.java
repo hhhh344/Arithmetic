@@ -1,12 +1,9 @@
 package com.hh.dao;
 
-import com.hh.entity.Expression;
-import com.hh.entity.ExpressionList;
 import org.json.JSONArray;
+import org.json.JSONException;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
@@ -29,7 +26,7 @@ public interface IFileUtils {
      * @param expressionList 表达式列表
      * @return 是否成功写入
      */
-    public boolean writeExpressionInFile(File file, JSONArray expressionList) throws IOException;
+    public boolean writeExpressionInFile(File file, JSONArray expressionList) throws IOException, JSONException;
 
     /**
      * 将答案写入文件
@@ -37,7 +34,7 @@ public interface IFileUtils {
      * @param expressionList 表达式列表
      * @return 是否成功写入
      */
-    public boolean writeAnswerInFile(File file, JSONArray expressionList) throws IOException;
+    public boolean writeAnswerInFile(File file, JSONArray expressionList) throws IOException, JSONException;
 
     /**
      * 判断表达式和计算结果是否一致
@@ -78,5 +75,5 @@ public interface IFileUtils {
      * @return json序列
      * @throws IOException
      */
-    public JSONArray mapToJSON(File expressionFile, File answerFile) throws IOException;
+    public JSONArray mapToJSON(File expressionFile, File answerFile) throws IOException, JSONException;
 }

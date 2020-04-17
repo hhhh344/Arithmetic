@@ -2,16 +2,12 @@ package com.hh.dao.impl;
 
 import com.hh.dao.IFileUtils;
 import com.hh.entity.Expression;
-import com.hh.entity.ExpressionList;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -35,7 +31,7 @@ public class FileUtilsImpl implements IFileUtils {
     }
 
     @Override
-    public boolean writeExpressionInFile(File file, JSONArray expressionList) throws IOException {
+    public boolean writeExpressionInFile(File file, JSONArray expressionList) throws IOException, JSONException {
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
 
@@ -51,7 +47,7 @@ public class FileUtilsImpl implements IFileUtils {
     }
 
     @Override
-    public boolean writeAnswerInFile(File file, JSONArray expressionList) throws IOException {
+    public boolean writeAnswerInFile(File file, JSONArray expressionList) throws IOException, JSONException {
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
 
@@ -76,8 +72,8 @@ public class FileUtilsImpl implements IFileUtils {
         int correctCount = 0;
         int wrongCount = 0;
 
-        String correctString = "Correct:(";
-        String wrongString = "Wrong:(";
+        StringBuilder correctString = new StringBuilder("Correct:(");
+        StringBuilder wrongString = new StringBuilder("Wrong:(");
 
         for (Map.Entry<Integer, String> item : expressionFileMap.entrySet()) {
             Integer key = item.getKey();
@@ -85,34 +81,31 @@ public class FileUtilsImpl implements IFileUtils {
             if(item.getValue().equals(answerFileMap.get(key))) {
                 correctCount++;
                 if(correctCount == 1) {
-                    correctString += key;
+                    correctString.append(key);
                 }
                 else {
-                    correctString += ", " + key;
+                    correctString.append("," + key);
                 }
             }
             else {
                 wrongCount++;
                 if(wrongCount == 1) {
-                    wrongString += key;
+                    wrongString.append(key);
                 }
                 else {
-                    wrongString += ", " + key;
+                    wrongString.append("," + key);
                 }
             }
         }
-        correctString += ")";
-        wrongString += ")";
+        correctString.append(")");
+        wrongString.append(")");
+        correctString.insert(correctString.indexOf("("),correctCount);
+        wrongString.insert(wrongString.indexOf("("),wrongCount);
 
-        StringBuilder correctStringBuilder = new StringBuilder(correctString);
-        StringBuilder wrongStringBuilder = new StringBuilder(wrongString);
 
-        correctStringBuilder.insert(correctStringBuilder.indexOf("("), correctCount);
-        wrongStringBuilder.insert(wrongStringBuilder.indexOf("("), wrongCount);
-
-        bw.write(correctStringBuilder.toString());
+        bw.write(correctString.toString());
         bw.newLine();
-        bw.write(wrongStringBuilder.toString());
+        bw.write(wrongString.toString());
 
         bw.close();
         fw.close();
@@ -122,6 +115,8 @@ public class FileUtilsImpl implements IFileUtils {
         }
         return false;
     }
+
+
 
     @Override
     public Map<Integer, String> getExpressionFileMap(File expressionFile) throws IOException {
@@ -194,9 +189,13 @@ public class FileUtilsImpl implements IFileUtils {
     }
 
     @Override
-    public JSONArray mapToJSON(File expressionFile, File answerFile) throws IOException {
+    public JSONArray mapToJSON(File expressionFile, File answerFile) throws IOException, JSONException {
         Map<Integer, String> expressionMap = getExpressionFileMap(expressionFile);
         Map<Integer, String> resultMap = getExpressionFileAnswerMap(expressionFile);
+        //如果出现未知字符
+        if (resultMap == null){
+            return null;
+        }
         Map<Integer, String> answerMap = getAnswerFileMap(answerFile);
         JSONArray json = new JSONArray();
         for(Map.Entry<Integer, String> item : expressionMap.entrySet()) {
